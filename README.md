@@ -2,15 +2,18 @@
 Description:
 In this project, you will be modeling a common roadway occurrence, where a lane is closed and a flag
 person is directing traffic.
+
 The figure above shows the scenario. We have one lane closed of a two-lane road, with traffic coming
 from the North and South. Because of traffic lights, the traffic on the road comes in bursts. When a car
 arrives, there is an 80% chance of another car following it, but once no car comes, there is a 20 second
 delay (use the provided pthread_sleep) before any new car will come.
+
 During the times when no cars are at either end, the flag person will fall asleep. When a car arrives at
 either end, the flag person will wake up and allow traffic from that side to pass the construction area, until
 there are no more cars from that side, or until there are 10 cars or more lining up on the opposite side. If
 there are 10 cars or more on the opposite side, the flag person needs to allow the cars from the opposite
 side to pass.
+
 Each car takes 1 second (use the provided pthread_sleep) to go through the construction area.
 Your job is to construct a simulation of these events where under no conditions will a deadlock occur. A
 deadlock could either be that the flag person does not allow traffic through from either side, or let’s traffic
@@ -38,11 +41,18 @@ Time State
 
 Design always goes first. In this assignment, we need a README file that must have the following
 components:
+
 • Team member’s names and respective contributions
+
 • How many threads? What is the task for each thread? What is the corresponding thread
 function name in your code?
+
 • How many semaphores? Describe each semaphore variable’s name, initial value and purpose.
+
 • How many mutex locks? Describe each mutex lock’s name and purpose.
+
 • Strengths
+
 • Weaknesses.
+
 Please use the provided README template file for this project.

@@ -12,12 +12,16 @@ Never, unbounded
 
 /*
 Shared Variables:
-BuffN;
-BuffS
-BuffMutex
-BuffMutex
-BuffNSize
-BuffSSize
+Buf[2]
+Mut[2]
+Empty
+Intersect
+InterCount
+IntLock (Mutex)
+
+
+Local Variable for Consumer
+Bool side
 */
 
 

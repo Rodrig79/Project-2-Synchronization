@@ -67,7 +67,9 @@ void *carSpawn(void *param)
         while (randInt < 8)
         {
 	randInt = (rand() % 10);
+		//Lock 
 	*numCars++;
+		//Unlock 
 	//Lock buffer
 	//Pop into queue at this point
         //Unlock buffer

@@ -56,8 +56,8 @@ void *carSpawn(void *param)
     pthread_mutex_t **bufLock = ((pthread_mutex_t ***)param)[2];
     sem_t *emptyLock = ((sem_t **)param)[3];
     string *side = ((string **)param[4]);
-	int *maxCars = ((int **)param)[5];
-	pthread_mutex_t **numCarsLock = ((pthread_mutex_t ***)param)[6];
+    int *maxCars = ((int **)param)[5];
+    pthread_mutex_t **numCarsLock = ((pthread_mutex_t ***)param)[6];
 
     //create cars
     int randInt = (rand() % 10); //generates an int 0-9
@@ -66,16 +66,23 @@ void *carSpawn(void *param)
     {
         while (randInt < 8)
         {
-	randInt = (rand() % 10);
-		//Lock 
-	*numCars++;
-		//Unlock 
-	//Lock buffer
-	//Pop into queue at this point
-        //Unlock buffer
-	}
-            pthread_sleep(20);
+            randInt = (rand() % 10);
+            //create car
+            Car newCar;
+            newCar.side = *side;
+
+            wait(numCarsLock);
+            *numCars++;
+            signal(numCarsLock);
+
+            //insert into buffer
+            wait(bufLock);
+            buf[numCars] = newCar;
+            signal(bufLock);
+        }
+        pthread_sleep(20);
     }
+}
 /*
 	signals cars taking from both sides according to specified rules
 	param = [buf[2], bufLock[2], emptyLock, intersectCount,intersectCountLock, intersectLock, fileLock]

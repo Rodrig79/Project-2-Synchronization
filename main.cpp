@@ -52,36 +52,40 @@ int pthread_sleep(int seconds)
 void *carSpawn(void *param)
 {
     int *numCars = ((int **)param)[0];
-    queue<Car *> *buf = ((int **)param)[1];
-    pthread_mutex_t **bufLock = ((pthread_mutex_t ***)param)[2];
+    std::queue<Car*>*buf = ((std::queue<Car*>**)param)[1];
+    pthread_mutex_t* bufLock = ((pthread_mutex_t **)param)[2];
     sem_t *emptyLock = ((sem_t **)param)[3];
-    string *side = ((string **)param[4]);
+    std::string *side = ((std::string **)param)[4];
     int *maxCars = ((int **)param)[5];
-    pthread_mutex_t **numCarsLock = ((pthread_mutex_t ***)param)[6];
+    pthread_mutex_t* numCarsLock = ((pthread_mutex_t **)param)[6];
 
     //create cars
     int randInt = (rand() % 10); //generates an int 0-9
     //80% chance of spawning another car
     while (*numCars < *maxCars)
-    		{
-       	   while (randInt < 8)
-        	{
-            	randInt = (rand() % 10);
+    {
+        while (randInt < 8)
+        {
+            randInt = (rand() % 10);
             //create car
-            Car* newCar = new Car;
-            newCar.side = *side;
+            Car* newCar = new Car();
+            newCar->side = *side;
 
-            wait(numCarsLock);
+			pthread_mutex_lock(numCarsLock);
             *numCars++;
-            signal(numCarsLock);
+			pthread_mutex_unlock(numCarsLock);
 
             //insert into buffer
-            wait(bufLock);
-            buf[numCars] = newCar;
-            signal(bufLock);
+			pthread_mutex_lock(bufLock);
+			if(buf->size() == 0) {
+				sem_post(emptyLock);
+			}
+            buf->push(newCar);
+			pthread_mutex_lock(bufLock);
         }
         pthread_sleep(20);
-        randInt = (rand() % 10);
+	}
+	return param;
 
     }
 }

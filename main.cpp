@@ -63,12 +63,12 @@ void *carSpawn(void *param)
     int randInt = (rand() % 10); //generates an int 0-9
     //80% chance of spawning another car
     while (*numCars < *maxCars)
-    {
-        while (randInt < 8)
-        {
-            randInt = (rand() % 10);
+    		{
+       	   while (randInt < 8)
+        	{
+            	randInt = (rand() % 10);
             //create car
-            Car newCar;
+            Car* newCar = new Car;
             newCar.side = *side;
 
             wait(numCarsLock);
@@ -81,6 +81,8 @@ void *carSpawn(void *param)
             signal(bufLock);
         }
         pthread_sleep(20);
+        randInt = (rand() % 10);
+
     }
 }
 /*

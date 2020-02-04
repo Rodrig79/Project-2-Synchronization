@@ -49,10 +49,47 @@ int pthread_sleep(int seconds)
 	param = [numCars, buf, bufLock, emptyLock, side]
 */
 
-void* carSpawn(void* param) {
-	return param;
-}
+void *carSpawn(void *param)
+{
+    int *numCars = ((int **)param)[0];
+    queue<Car *> *buf = ((int **)param)[1];
+    pthread_mutex_t **bufLock = ((pthread_mutex_t ***)param)[2];
+    sem_t *emptyLock = ((sem_t **)param)[3];
+    string *side = ((string **)param[4]);
 
+    //create cars
+    int randInt = (rand() % 10); //generates an int 0-9
+    int carsSpawned = 0;
+    int carsSpawning = 1;
+    //80% chance of spawning another car
+    while (numCars > 0)
+    {
+        while (randInt < 8)
+        {
+            cout << randInt << endl;
+            numCars++;
+            randInt = (rand() % 10);
+        }
+
+        cout << carsSpawning << " cars created going ";
+        if (side = 'n')
+        {
+            cout << "North" << endl;
+        }
+        else
+        {
+            cout << "South" << endl;
+        }
+
+        //fill list
+
+
+        for (int i = 0, i < carSpawning; i++){
+            numCars--;
+            
+        }
+            pthread_sleep(20);
+    }
 /*
 	signals cars taking from both sides according to specified rules
 	param = [buf[2], bufLock[2], emptyLock, intersectCount,intersectCountLock, intersectLock, fileLock]

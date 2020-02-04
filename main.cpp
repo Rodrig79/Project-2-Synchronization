@@ -63,12 +63,13 @@ void *carSpawn(void *param)
     int randInt = (rand() % 10); //generates an int 0-9
     int carsSpawning = 1;
     //80% chance of spawning another car
-    while (numCars > 0)
+    while (*numCars < *maxCars)
     {
         while (randInt < 8)
         {
         cout << randInt << endl;  
 	randInt = (rand() % 10);
+	carsSpawning++;
         }
 
         cout << carsSpawning << " cars created going ";

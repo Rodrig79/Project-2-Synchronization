@@ -83,10 +83,10 @@ void *carSpawn(void *param)
 
         //fill list
 
-
-        for (int i = 0, i < carSpawning; i++){
-            numCars--;
+	*numCars = *numCars + carsSpawning
+        for (int i = 0, i < carsSpawning; i++){
             
+            //insert car into queue
         }
             pthread_sleep(20);
     }

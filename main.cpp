@@ -2,6 +2,8 @@
 #include <queue>
 #include <pthread.h>
 #include <semaphore.h>
+#include <ctime>
+#include <string>
 
 struct Car {
 	int val = 0;
@@ -9,6 +11,7 @@ struct Car {
 };
 
 int main(){
+	srand(time(NULL)); //initialize random number generator
 	std::queue<int> test;
 	return 0;
 }

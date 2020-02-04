@@ -51,24 +51,24 @@ int pthread_sleep(int seconds)
 
 void *carSpawn(void *param)
 {
-    int *numCars = ((int **)param)[0];
+    int numCars = ((int **)param)[0];
     queue<Car *> *buf = ((int **)param)[1];
     pthread_mutex_t **bufLock = ((pthread_mutex_t ***)param)[2];
     sem_t *emptyLock = ((sem_t **)param)[3];
     string *side = ((string **)param[4]);
+	int maxCars = ((int **)param)[5];
+	pthread_mutex_t **numCarsLock = ((pthread_mutex_t ***)param)[6];
 
     //create cars
     int randInt = (rand() % 10); //generates an int 0-9
-    int carsSpawned = 0;
     int carsSpawning = 1;
     //80% chance of spawning another car
     while (numCars > 0)
     {
         while (randInt < 8)
         {
-            cout << randInt << endl;
-            numCars++;
-            randInt = (rand() % 10);
+        cout << randInt << endl;  
+	randInt = (rand() % 10);
         }
 
         cout << carsSpawning << " cars created going ";

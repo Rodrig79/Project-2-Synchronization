@@ -61,34 +61,17 @@ void *carSpawn(void *param)
 
     //create cars
     int randInt = (rand() % 10); //generates an int 0-9
-    int carsSpawning = 1;
     //80% chance of spawning another car
     while (*numCars < *maxCars)
     {
         while (randInt < 8)
         {
-        cout << randInt << endl;  
 	randInt = (rand() % 10);
-	carsSpawning++;
-        }
-
-        cout << carsSpawning << " cars created going ";
-        if (side = 'n')
-        {
-            cout << "North" << endl;
-        }
-        else
-        {
-            cout << "South" << endl;
-        }
-
-        //fill list
-
-	*numCars = *numCars + carsSpawning
-        for (int i = 0, i < carsSpawning; i++){
-            
-            //insert car into queue
-        }
+	*numCars++;
+	//Lock buffer
+	//Pop into queue at this point
+        //Unlock buffer
+	}
             pthread_sleep(20);
     }
 /*

@@ -18,7 +18,7 @@ Marco Rodriguez
 • Organized group members over github
 
 --------------------------------------------------
-Threads (Tasks each thread, Thread function name)
+Threads (Tasks for each thread, Thread function name)
 
 Car Spanwer Thread:
   void *carSpawn(void *param)

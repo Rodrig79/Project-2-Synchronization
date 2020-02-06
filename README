@@ -19,11 +19,26 @@ Marco Rodriguez
 --------------------------------------------------
 Threads (Tasks each thread, Thread function name)
 
-•
-•
-•
+Car Spanwer Thread:
+  void *carSpawn(void *param)
+  Tasks:
+  • Create cars that will be loaded into the buffer
+  • When a car arrives, there is an 80% chance of another car following it
+  • Once no car comes, there is a 20 second delay (using pthread_sleep) before any new car will come.
 
-
+Flag Signaler Thread:
+ void *signaler(void *param)
+ Tasks:
+  • 
+  • 
+  •
+  
+ Intersection Thread:
+  void* intersection(void* param)
+  Tasks:
+  • 
+  •
+  • 
 ---------------------------------------------------
 Semaphores (Name, Initial Value, Purpose)
 

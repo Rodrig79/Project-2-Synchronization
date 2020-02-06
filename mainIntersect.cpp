@@ -11,15 +11,27 @@ struct Car {
   	struct timespec endTime;
 };
 
+void* intersection(void* param);
+
 int main(){
+	pthread_t tid;
+	int* intersectCount;
+	Car* c;
 	std::queue<int> test;
+	pthread_mutex_t* intersectCountLock;
 	void* args = new void*[5];
 	((Car**)args)[0] = c;
 	((int**)args)[1] = intersectCount;
+	
+	pthread_mutex_t* intersectLock;
+	pthread_mutex_t* fileLock;
+
+
+
 	((pthread_mutex_t**)args)[2] = intersectCountLock;
 	((pthread_mutex_t**)args)[3] = intersectLock;
 	((pthread_mutex_t**)args)[4] = fileLock;
-	pthread_t tid;
+	
 		pthread_create(&tid, NULL, intersection, args);
 	return 0;
 
@@ -109,20 +121,24 @@ void* signaler(void* param) {
 */
 void* intersection(void* param) {
 
-    int count = 0; // cnange later
-    // unpack variables
-    // sleep
-    // car is in intersection
+    int count = 0; // change later
+    // pthread_mutex_t* bufLock = ((pthread_mutex_t**)param)[1];
+	// sem_t* emptyLock = ((sem_t**)param)[2];
+	// int* intersectCount = ((int**)param)[3];
+	// pthread_mutex_t* intersectCountLock = ((pthread_mutex_t**)param)[4];
+	// pthread_mutex_t* intersectLock = ((pthread_mutex_t**)param)[5];
+	// pthread_mutex_t* fileLock = ((pthread_mutex_t**)param)[6];
 
-    // car c = (car**)param[0];
-    // intersectCount = (int**)param[1];
-    // pthread_mutex_t intersectCountLock = (mutex***)param[2];
-    // pthread_mutex_t intersectLock = (mutex***)param[3];
-    // pthread_mutex_t fileLock = (mutex***)param[3];
+    Car* c = ((Car**)param)[0];
+    int* intersectCount = ((int**)param)[1];
+    pthread_mutex_t* intersectCountLock = ((pthread_mutex_t**)param)[2];
+    pthread_mutex_t* intersectLock = ((pthread_mutex_t**)param)[3];
+    pthread_mutex_t* fileLock = ((pthread_mutex_t**)param)[4];
 
     while (count < 20){
-        pthread_sleep(1);
-		c.endTime = localtime();
+        // pthread_sleep(1);
+
+		// c.endTime = localtime();
 		pthread_mutex_lock(intersectCountLock);
 		*intersectCount--;
 		
@@ -131,11 +147,13 @@ void* intersection(void* param) {
 
 		pthread_mutex_unlock(intersectCountLock);
         pthread_mutex_lock(fileLock);
-        carLog.open("car.log", ios_base::app);
-        cout << setw(7) << c.id << setw(7) << c.arrivalTime; << setw(7) << c.startTime << setw(7) << c.endTime;
-        carLog.close();
+        // carLog.open("car.log", ios_base::app);
+        // cout << setw(7) << c.id << setw(7) << c.arrivalTime; << setw(7) << c.startTime << setw(7) << c.endTime;
+        // carLog.close();
         pthread_mutex_unlock(fileLock);
         count++;
 		delete c;
+
+		// fflush(stdout); in main
     }
 }

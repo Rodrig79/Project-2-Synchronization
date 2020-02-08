@@ -58,7 +58,7 @@ bufLock
 • Lock for when writing to car buffer.
 
 fileLock
-• Used when writing to log and when flushing to disk.
+• Used when writing to car.log and flagperson.log
 ---------------------------------------------------
 Strengths
 •

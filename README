@@ -44,16 +44,21 @@ Flag Signaler Thread:
 ---------------------------------------------------
 Semaphores (Name, Initial Value, Purpose)
 
-•
-
+emptyLock
+• Initial Value = 0
+• Purpose: 
+• In carSpawn thread: After pushing a car into the buffer, emptyLock will check if its value is 0,
+ log a wake up action, then call sem_post
+• In signaler thread: Uses emptyLock to determine if buffer is empty, then logs that the signaler 
+went to sleep.
 ---------------------------------------------------
 Mutex Locks (Name, Purpose)
 
-•
+bufLock
+• Lock for when writing to car buffer.
 
-•
-
-•
+fileLock
+• Used when writing to log and when flushing to disk.
 ---------------------------------------------------
 Strengths
 •
